@@ -38,7 +38,7 @@
 6. Notificación al empleado.
 
 ## 4. Workflow Diagram
-![diagramaFlujo](images/diagramaFlujo.png)
+![diagramaFlujo](images/diagramaFlujo.jpg)
 
 ## 5. Scenarios
 | Escenario | Acción esperada |
