@@ -47,7 +47,6 @@ La solución utiliza Excel Online (OneDrive) como capa de almacenamiento de dato
      Se valida que:
      DaysRequested ≤ (VacationDaysAllowed - VacationDaysUsed)
      - Si no cumple → rechazo automático y notificación al empleado.
-
 4. Si todas las validaciones son correctas → la solicitud se envía al supervisor para aprobación.
 5. Si el supervisor rechaza la solicitud → se notifica al empleado sin modificar los días utilizados.
 6. Si el supervisor aprueba la solicitud:
