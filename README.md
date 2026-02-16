@@ -24,29 +24,28 @@ This project demonstrates intermediate Power Automate capabilities including:
 
 ## 🧩 System Architecture
 
-The solution includes:
+Vacation Request Automation is designed using a decoupled arcchitecture that separates inout, business logic, and data storage.
 
+Flow:
 1. Microsoft Forms – Vacation request submission  
-2. SharePoint List – Employees (stores available vacation days)  
-3. SharePoint List – Vacation Requests  
-4. Power Automate Flow – Validation + Approval + Update logic  
+2. Power Automate Flow – Validation + Approval + Update logic
+3. Excel Online (Data Storage)
+4. Email Notifications
+
+The system is intentionally designed to be easly migratable to SharePoint Lists if licensing becomes available.
 
 ---
 
 ## 🔄 Business Logic
 
-1. Employee submits vacation request (start date / end date).
-2. Flow calculates total requested days.
-3. System retrieves available vacation balance from SharePoint.
-4. Validation:
-   - If requested days exceed available balance → automatic rejection.
-   - If valid → approval request is sent.
-5. If approved:
-   - Vacation balance is updated.
-   - Request status is updated.
-6. If rejected:
-   - Status is updated.
-   - Notification email is sent.
+The flow validates vacation requests based on predefined business rules:
+
+1. Each employee has a defined number of available vacation days.
+2. Requested days are calculated automatically.
+3. If requested days exceed available balance → automatic rejection.
+4. If valid → approval request is sent.
+5. Upon approval → employee balance is updated.
+6. Upon rejection → no balance modification occurs.
 
 ---
 
@@ -54,8 +53,8 @@ The solution includes:
 
 - Microsoft Power Automate
 - Microsoft Forms
-- SharePoint Online
-- Power Platform
+- Excel Online (OneDrive)
+- Outlook
 
 ---
 
@@ -100,29 +99,29 @@ Este proyecto demuestra habilidades intermedias en Power Automate incluyendo:
 
 ## 🧩 Arquitectura del Sistema
 
-La solución incluye:
+VacationFlow está diseñado con una arquitectura desacoplada que separa la captura de información, la lógica de negocio y la capa de almacenamiento de datos.
 
-1. Microsoft Forms – Envío de solicitud de vacaciones  
-2. Lista en SharePoint – Empleados (almacena días disponibles)  
-3. Lista en SharePoint – Solicitudes de Vacaciones  
-4. Flujo en Power Automate – Validación + Aprobación + Actualización de saldo  
+Flujo general:
+
+Microsoft Forms
+→ Power Automate
+→ Excel Online (OneDrive)
+→ Notificaciones por correo (Outlook)
+
+Nota: La arquitectura fue diseñada para permitir migración sencilla a SharePoint Lists en caso de contar con licencia empresarial.
 
 ---
 
 ## 🔄 Lógica de Negocio
 
-1. El empleado envía solicitud (fecha inicio / fecha fin).
-2. El flujo calcula automáticamente los días solicitados.
-3. El sistema consulta el saldo disponible en SharePoint.
-4. Validación:
-   - Si los días solicitados exceden los disponibles → rechazo automático.
-   - Si son válidos → se envía a aprobación.
-5. Si se aprueba:
-   - Se descuentan los días del saldo.
-   - Se actualiza el estado de la solicitud.
-6. Si se rechaza:
-   - Se actualiza el estado.
-   - Se envía notificación por correo.
+El flujo automatizado valida las solicitudes de vacaciones con base en reglas predefinidas:
+
+1. Cada empleado tiene un número definido de días de vacaciones disponibles.
+2. Los días solicitados se calculan automáticamente a partir de la fecha de inicio y fin.
+3. Si los días solicitados superan el saldo disponible → la solicitud se rechaza automáticamente.
+4. Si la solicitud es válida → se envía a aprobación.
+5. Si es aprobada → se actualiza el saldo del empleado.
+6. Si es rechazada → no se modifica el saldo.
 
 ---
 
