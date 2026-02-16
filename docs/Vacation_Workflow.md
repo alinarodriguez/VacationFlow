@@ -7,43 +7,59 @@
 - Aprobaciones/Rechazos notifican automáticamente al empleado.
 - Vacaciones aprobadas actualizan los días usados por el empleado.
 
-## 2. SharePoint Lists
+## 2. Estructura de Datos (Excel Online)
+La solución utiliza Excel Online (OneDrive) como capa de almacenamiento de datos estructurada.
 
-### Employees
+### 📊 Employees.xlsx
+
 | Campo | Tipo | Descripción |
 |-------|------|-------------|
-| EmployeeID | Número | ID único del empleado |
-| Name | Texto | Nombre completo |
-| Department | Texto | Departamento |
-| VacationDaysAllowed | Número | Días permitidos por año |
-| VacationDaysUsed | Número | Días usados en el año |
+| EmployeeName | Texto | Nombre completo del empleado |
+| StartDate | Fecha | Fecha de contratación |
+| AvailableVacationDays | Número | Días de vacaciones disponibles |
 
-### Vacation Requests
+---
+
+### 📁 VacationRequests.xlsx
+
 | Campo | Tipo | Descripción |
 |-------|------|-------------|
-| RequestID | Número | ID único de la solicitud |
-| EmployeeID | Lookup | Relación con empleado |
-| StartDate | Fecha | Fecha de inicio |
-| EndDate | Fecha | Fecha de fin |
-| DaysRequested | Número | Días solicitados |
-| Status | Choice | Pending / Approved / Rejected |
-| Comments | Texto | Comentarios del supervisor |
+| EmployeeName | Texto | Nombre del empleado |
+| StartDate | Fecha | Fecha de inicio de vacaciones |
+| EndDate | Fecha | Fecha de fin de vacaciones |
+| DaysRequested | Número | Días solicitados (calculados automáticamente) |
+| Status | Texto | Pending / Approved / Rejected |
+| ApprovalComments | Texto | Comentarios del aprobador |
 
-## 3. Workflow Structure
-1. El empleado crea la solicitud.
-2. Validación: `DaysRequested` + `VacationDaysUsed` ≤ `VacationDaysAllowed`.
-3. Si válido → enviar a supervisor; si no → rechazo automático.
-4. Supervisor aprueba o rechaza.
-5. Si aprobado → actualizar `VacationDaysUsed`.
-6. Notificación al empleado.
+> Ambas hojas están formateadas como tablas estructuradas de Excel para permitir integración adecuada con Power Automate.
 
-## 4. Workflow Diagram
+---
+
+## 3. Estructura del Flujo
+
+1. El empleado envía la solicitud mediante Microsoft Forms.
+2. Power Automate calcula automáticamente los días solicitados.
+3. El flujo consulta `Employees.xlsx` para obtener los días disponibles.
+4. Validación:  
+   `DaysRequested ≤ AvailableVacationDays`
+5. Si no cumple la condición → rechazo automático y notificación.
+6. Si cumple la condición → enviar solicitud para aprobación.
+7. Si es aprobada → actualizar `AvailableVacationDays` en Employees.xlsx.
+8. Enviar notificación final al empleado.
+
+---
+
+## 4. Diagrama del Flujo
+
 ![diagramaFlujo](images/diagramaFlujo.jpg)
 
-## 5. Scenarios
+---
+
+## 5. Escenarios de Prueba
+
 | Escenario | Acción esperada |
 |-----------|----------------|
-| Solicitud válida dentro de días | Enviar a supervisor |
-| Solicitud excede días permitidos | Rechazo automático y notificación |
-| Solicitud aprobada | Actualizar días usados y notificar |
-| Solicitud rechazada | Notificar sin actualizar días usados |
+| Solicitud válida dentro del saldo | Enviar a aprobación |
+| Solicitud excede días disponibles | Rechazo automático y notificación |
+| Solicitud aprobada | Actualizar saldo y notificar |
+| Solicitud rechazada | Notificar sin modificar saldo |
