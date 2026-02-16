@@ -37,15 +37,22 @@ La solución utiliza Excel Online (OneDrive) como capa de almacenamiento de dato
 
 ## 3. Estructura del Flujo
 
-1. El empleado envía la solicitud mediante Microsoft Forms.
-2. Power Automate calcula automáticamente los días solicitados.
-3. El flujo consulta `Employees.xlsx` para obtener los días disponibles.
-4. Validación:  
-   `DaysRequested ≤ AvailableVacationDays`
-5. Si no cumple la condición → rechazo automático y notificación.
-6. Si cumple la condición → enviar solicitud para aprobación.
-7. Si es aprobada → actualizar `AvailableVacationDays` en Employees.xlsx.
-8. Enviar notificación final al empleado.
+1. El empleado envía la solicitud de vacaciones mediante Microsoft Forms.
+2. Power Automate calcula automáticamente la cantidad de días solicitados en función de la fecha de inicio y fecha de fin.
+3. Fase de validación automática:
+   - Validación de anticipación:
+     Se verifica que la solicitud se realice con al menos 5 días de anticipación respecto a la fecha de inicio.
+     - Si no cumple → rechazo automático y notificación al empleado.
+   - Validación de días disponibles:
+     Se valida que:
+     DaysRequested ≤ (VacationDaysAllowed - VacationDaysUsed)
+     - Si no cumple → rechazo automático y notificación al empleado.
+
+4. Si todas las validaciones son correctas → la solicitud se envía al supervisor para aprobación.
+5. Si el supervisor rechaza la solicitud → se notifica al empleado sin modificar los días utilizados.
+6. Si el supervisor aprueba la solicitud:
+   - Se actualiza el campo VacationDaysUsed en Employees.xlsx.
+   - Se envía notificación final al empleado.
 
 ---
 
