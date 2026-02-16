@@ -63,3 +63,17 @@ La solución utiliza Excel Online (OneDrive) como capa de almacenamiento de dato
 | Solicitud excede días disponibles | Rechazo automático y notificación |
 | Solicitud aprobada | Actualizar saldo y notificar |
 | Solicitud rechazada | Notificar sin modificar saldo |
+
+## 6. Future Migration to SharePoint
+
+The current solution uses Excel Online as the data layer due to licensing constraints.  
+However, the architecture is designed to support migration to SharePoint Lists with minimal changes.
+
+Migration considerations:
+
+- Replace Employees.xlsx with a SharePoint List.
+- Replace VacationRequests.xlsx with a SharePoint List.
+- Update Power Automate connectors from Excel to SharePoint.
+- Maintain the same business logic and approval structure.
+
+Because business rules are handled within Power Automate and not embedded in the data layer, the transition would not affect core validation logic.
