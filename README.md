@@ -60,9 +60,9 @@ The flow validates vacation requests based on predefined business rules:
 
 ## 📂 Repository Structure
 
--/docs
--/docs/diagrams
--/screenshots
+- /docs
+- /docs/images
+- /screenshots
 
 ---
 
