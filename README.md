@@ -11,11 +11,12 @@ The solution allows employees to submit vacation requests, validates the number 
 This project demonstrates intermediate Power Automate capabilities including:
 
 - Business rule validation
+- Custom app development
 - Conditional logic
 - Variable handling
-- SharePoint integration
-- Automated approvals
+- Approval workflows
 - Dynamic record updates
+- Identity-based request association
 
 **Project Start Date:** February 16, 2026  
 **Status:** In Development
@@ -24,15 +25,17 @@ This project demonstrates intermediate Power Automate capabilities including:
 
 ## 🧩 System Architecture
 
-Vacation Request Automation is designed using a decoupled arcchitecture that separates inout, business logic, and data storage.
+VacationFlow follows a decoupled architecture that separates user interface, business logic, and data storage.
 
 Flow:
-1. Microsoft Forms – Vacation request submission  
+1. Microsoft Power Apps – Vacation request submission (Canvas App) 
 2. Power Automate Flow – Validation + Approval + Update logic
-3. Excel Online (Data Storage)
-4. Email Notifications
+3. Microsoft Excel Online (OneDrive) – Data storage
+4. Microsoft Outlook – Email notifications
 
-The system is intentionally designed to be easly migratable to SharePoint Lists if licensing becomes available.
+The application automatically associates each request with the logged-in user using identity context, reducing manual input errors.
+
+The architecture is designed to be easily migratable to SharePoint Lists or Dataverse if required.
 
 ---
 
@@ -47,12 +50,13 @@ The flow validates vacation requests based on predefined business rules:
 5. Upon approval → employee balance is updated.
 6. Upon rejection → no balance modification occurs.
 
+Users cannot manipulate status values directly. Status changes are controlled exclusively by the automated flow.
 ---
 
 ## 🛠 Technologies Used
 
 - Microsoft Power Automate
-- Microsoft Forms
+- Microsoft Power Apps (Canvas App)
 - Excel Online (OneDrive)
 - Outlook
 
@@ -63,9 +67,6 @@ The flow validates vacation requests based on predefined business rules:
 - /docs
 - /docs/images
 - /screenshots
-
----
-
 
 Documentation and evidence of the flow design and implementation will be stored in these folders.
 
@@ -85,12 +86,12 @@ Permite a los empleados enviar solicitudes de vacaciones, valida automáticament
 
 Este proyecto demuestra habilidades intermedias en Power Automate incluyendo:
 
-- Validaciones de reglas de negocio
-- Lógica condicional
-- Manejo de variables
-- Integración con SharePoint
+- Desarrollo de aplicaciones con Power Apps
+- Implementación de reglas de negocio
 - Automatización de aprobaciones
-- Actualización dinámica de registros
+- Control de estados mediante flujo automatizado
+- Actualización dinámica de datos
+- Asociación automática del usuario autenticado
 
 **Fecha de inicio del proyecto:** 16 de febrero de 2026  
 **Estado:** En desarrollo  
@@ -99,16 +100,19 @@ Este proyecto demuestra habilidades intermedias en Power Automate incluyendo:
 
 ## 🧩 Arquitectura del Sistema
 
-VacationFlow está diseñado con una arquitectura desacoplada que separa la captura de información, la lógica de negocio y la capa de almacenamiento de datos.
+La solución está diseñada con una arquitectura desacoplada que separa:
+- 1Interfaz de usuario (Power Apps)
+- Lógica de negocio (Power Automate)
+- Almacenamiento de datos (Excel Online)
 
 Flujo general:
 
-Microsoft Forms
+→ Power Apps
 → Power Automate
 → Excel Online (OneDrive)
 → Notificaciones por correo (Outlook)
 
-Nota: La arquitectura fue diseñada para permitir migración sencilla a SharePoint Lists en caso de contar con licencia empresarial.
+La arquitectura permite una futura migración a SharePoint Lists o Dataverse sin rediseñar la lógica principal.
 
 ---
 
@@ -117,11 +121,12 @@ Nota: La arquitectura fue diseñada para permitir migración sencilla a SharePoi
 El flujo automatizado valida las solicitudes de vacaciones con base en reglas predefinidas:
 
 1. Cada empleado tiene un número definido de días de vacaciones disponibles.
-2. Los días solicitados se calculan automáticamente a partir de la fecha de inicio y fin.
-3. Si los días solicitados superan el saldo disponible → la solicitud se rechaza automáticamente.
-4. Si la solicitud es válida → se envía a aprobación.
-5. Si es aprobada → se actualiza el saldo del empleado.
+2. Los días solicitados se calculan automáticamente según las fechas.
+3. Si los días solicitados superan el saldo → rechazo automático.
+4. Si es válida → se envía a aprobación.
+5. Si es aprobada → se actualiza el saldo.
 6. Si es rechazada → no se modifica el saldo.
+7. El estado solo puede ser modificado por el flujo automatizado.
 
 ---
 
