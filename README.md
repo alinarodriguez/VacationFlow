@@ -53,6 +53,16 @@ The flow validates vacation requests based on predefined business rules:
 Users cannot manipulate status values directly. Status changes are controlled exclusively by the automated flow.
 ---
 
+## 📋 Business Constraints
+
+- Employees may not have more than one pending vacation request at a time.
+- Vacation requests must not overlap with already approved time off.
+- Requests must be submitted at least 5 days in advance.
+- Requested days must not exceed available vacation balance.
+- Vacation balance is only deducted upon approval.
+
+---
+
 ## 🛠 Technologies Used
 
 - Microsoft Power Automate
@@ -127,6 +137,16 @@ El flujo automatizado valida las solicitudes de vacaciones con base en reglas pr
 5. Si es aprobada → se actualiza el saldo.
 6. Si es rechazada → no se modifica el saldo.
 7. El estado solo puede ser modificado por el flujo automatizado.
+
+---
+
+## 📋 Restricciones de Negocio
+
+- Un empleado no puede tener más de una solicitud de vacaciones con estado "Pendiente" al mismo tiempo.
+- Las solicitudes de vacaciones no deben superponerse con periodos previamente aprobados.
+- Las solicitudes deben enviarse con al menos 5 días de anticipación.
+- Los días solicitados no pueden exceder el saldo de vacaciones disponible.
+- El saldo de vacaciones solo se descuenta una vez que la solicitud es aprobada.
 
 ---
 
