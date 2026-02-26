@@ -1,4 +1,4 @@
-# Gestión de Vacaciones – Caso de Estudio
+# VacationFlow – Documentación Técnica
 
 ## 1. Problema de Negocio
 
@@ -9,11 +9,25 @@ Muchas pequeñas y medianas empresas gestionan las solicitudes de vacaciones de 
 - Ausencia de trazabilidad en aprobaciones
 - Dependencia de seguimiento individual por parte del gerente
 
-Esta solución automatiza el proceso completo de solicitud y aprobación de vacaciones, asegurando control, trazabilidad y cumplimiento de reglas de negocio desde el primer momento.
+---
+## 2. Alcance de la Solución
+
+Esta implementación cubre:
+
+- Solicitud y validación de vacaciones
+- Flujo de aprobación jerárquico
+- Control de saldo en tiempo real
+- Registro de auditoría
+- Arquitectura preparada para migración
+
+No incluye:
+- Integración directa con sistemas de nómina
+- Gestión automática de acumulación anual
+- Integración nativa con Azure AD
 
 ---
 
-## 2. Reglas de Negocio
+## 3. Reglas de Negocio
 
 - Cada empleado tiene un máximo de 15 días de vacaciones por año.
 - Los empleados no pueden tener más de una solicitud de vacaciones pendiente al mismo tiempo.
@@ -23,13 +37,13 @@ Esta solución automatiza el proceso completo de solicitud y aprobación de vaca
 - El saldo de vacaciones se descuenta únicamente al aprobarse la solicitud.
 - Las solicitudes requieren la aprobación del gerente directo del empleado.
 - Un rol de Administrador puede aprobar cualquier solicitud pendiente si el gerente asignado no está disponible.
-- Las rechazos requieren un comentario obligatorio.
+- Los rechazos requieren un comentario obligatorio.
 - Los usuarios no pueden manipular directamente los valores de estado. Los cambios de estado son controlados exclusivamente por el flujo automatizado.
 - El sistema registra el aprobador real para trazabilidad de auditoría.
 
 ---
 
-## 3. Estructura de Datos (Excel Online)
+## 4. Estructura de Datos (Excel Online)
 
 La solución utiliza Excel Online (OneDrive) como capa de almacenamiento de datos estructurados.  
 La arquitectura simula un modelo organizacional real, incluyendo jerarquía y control de acceso basado en roles.
@@ -38,8 +52,8 @@ La arquitectura simula un modelo organizacional real, incluyendo jerarquía y co
 
 | Campo                 | Tipo   | Descripción                                 |
 |-----------------------|-------|---------------------------------------------|
-| EmployeeID            | Número| Identificador único del Empelado GUID       |
-| FristName             | Texto | Primer nombre del empleado                  |
+| EmployeeID            | Número| Identificador único del Empleado GUID       |
+| FirstName             | Texto | Primer nombre del empleado                  |
 | LastName              | Texto | Apellido del empleado                       |
 | UserPrincipalName     | Texto | Propietario de la solicitud                 |
 | StartDate             | Fecha | Fecha de contratación                        |
@@ -66,7 +80,7 @@ La arquitectura simula un modelo organizacional real, incluyendo jerarquía y co
 | StartDate        | Fecha    | Fecha de inicio de vacaciones                    |
 | EndDate          | Fecha    | Fecha de fin de vacaciones                       |
 | DaysRequested    | Número   | Calculado automáticamente                        |
-| Commets          | Texto    | Comentarios del empleado acerca de la solicitud  |
+| Comments         | Texto    | Comentarios del empleado acerca de la solicitud  |
 | Status           | Texto    | Pendiente / Aprobada / Rechazada                 |
 | ApproverEmail    | Texto    | Gerente asignado                                 |
 | ApprovalComments | Texto    | Obligatorio para rechazos                        |
@@ -83,7 +97,7 @@ La arquitectura simula un modelo organizacional real, incluyendo jerarquía y co
 
 ---
 
-## 4. Estrategia de Validación
+## 5. Estrategia de Validación
 
 Las validaciones se implementan en **dos niveles** para asegurar la integridad de los datos.
 
@@ -100,18 +114,9 @@ StartDate <= ExistingEndDate
 AND
 EndDate >= ExistingStartDate
 
-The system blocks saving until all conditions are satisfied.
-
-### Automation Layer (Power Automate)
-
-- Secondary validation of 5-day rule.
-- Secondary balance validation.
-- Protects against manual record insertion directly in Excel.
-- Ensures business rule enforcement regardless of entry point.
-
 ---
 
-## 5. Flujo de Aprobación
+## 6. Flujo de Aprobación
 
 1. El empleado envía la solicitud.  
 2. `DaysRequested` se calcula automáticamente.  
@@ -134,13 +139,13 @@ The system blocks saving until all conditions are satisfied.
 
 ---
 
-## 6. Diagrama del Flujo
+## 7. Diagrama del Flujo
 
 ![diagramaFlujo](images/diagramaFlujo.jpg)
 
 ---
 
-## 7. Modelo de Seguridad
+## 8. Modelo de Seguridad
 
 - El acceso basado en roles se simula usando la columna `Role`:
   - **Empleado** → Crear y ver sus propias solicitudes.  
@@ -154,7 +159,7 @@ The system blocks saving until all conditions are satisfied.
 
 ---
 
-## 8. Escenarios de Prueba
+## 9. Escenarios de Prueba
 
 | Escenario                             | Comportamiento Esperado   |
 |---------------------------------------|--------------------------|
@@ -168,20 +173,20 @@ The system blocks saving until all conditions are satisfied.
 
 ---
 
-## 9. Razón de usar Excel Online inicialmente
+## 10. Justificación de Uso de Excel Online
 
-Se decidió iniciar con **Excel Online** por varias razones:
+Excel Online fue seleccionado como capa inicial de datos por:
 
-- **Licencias limitadas:** No todos los usuarios contaban con acceso a SharePoint al inicio del proyecto.  
-- **Simplicidad de implementación:** Excel Online permite crear un prototipo funcional rápidamente sin configurar listas de SharePoint ni permisos complejos.  
-- **Portabilidad:** Los archivos pueden almacenarse en OneDrive y compartirse fácilmente con usuarios clave.  
-- **Flexibilidad para el flujo de Power Automate:** Las conexiones y validaciones funcionan igual que con SharePoint, lo que facilita migrar más adelante.  
+- Disponibilidad inmediata en entornos Microsoft 365 estándar.
+- Rapidez para prototipado funcional.
+- Facilidad de migración posterior a SharePoint Lists o Dataverse.
+- Simplicidad para entornos de pequeñas y medianas empresas.
 
-> La arquitectura está diseñada para que la migración a SharePoint sea directa y requiera mínimo refactorizado.
+La arquitectura fue diseñada para permitir migración directa sin alterar la lógica de negocio central.
 
 ---
 
-## 10. Migración Futura a SharePoint
+## 11. Migración Futura a SharePoint
 
 Actualmente la solución utiliza Excel Online debido a restricciones de licencia, pero la arquitectura permite migración con mínimo refactorizado.
 
@@ -196,7 +201,7 @@ Actualmente la solución utiliza Excel Online debido a restricciones de licencia
 
 ---
 
-## 11. Posibles Personalizaciones para Clientes
+## 12. Posibles Personalizaciones para Clientes
 
 La arquitectura permite adaptaciones según las necesidades del cliente, tales como:
 - Aprobaciones multinivel.
@@ -210,17 +215,17 @@ La arquitectura permite adaptaciones según las necesidades del cliente, tales c
 
 ---
 
-## 12. Supuestos y Limitaciones
+## 13. Supuestos y Limitaciones
 
 - Se implementa una aprobación de un solo nivel para simplificación.  
 - Se puede introducir aprobación multinivel mediante lógica de etapas.  
 - Los roles se simulan localmente y no están integrados con Azure AD.  
 - Excel Online no proporciona control de concurrencia transaccional.  
-- El sistema está diseñado como caso de estudio de portafolio y no como infraestructura productiva.  
+- La solución está diseñada como demostración arquitectónica y puede adaptarse a entornos productivos con ajustes en infraestructura y licenciamiento.
 
 ---
 
-## 13. Vista General de la Arquitectura
+## 14. Vista General de la Arquitectura
 
 ![FlujoAprobacion](images/FlujoAprobacion.png)
 
@@ -235,12 +240,12 @@ La arquitectura permite adaptaciones según las necesidades del cliente, tales c
 
 ---
 
-## 14. Diagrama de Relaciones de Entidad (ERD)
+## 15. Diagrama de Relaciones de Entidad (ERD)
 ![ERD Vacaciones](images/ERD_vacaciones.png)
 
 **Explicación del Diagrama**
 
-- EmployeeID en VacationRequests vincula las solicitudes a empleado
+- EmployeeID en VacationRequests vincula las solicitudes al empleado
 - ManagerEmail representa una relación jerárquica autorreferenciada.
 - ApproverEmail define el gerente asignado.
 - ApprovedBy permite trazabilidad de auditoría (aprobador real vs asignado).
@@ -248,7 +253,7 @@ La arquitectura permite adaptaciones según las necesidades del cliente, tales c
 
 ---
 
-## 15. ¿Qué demuestra esta solución?
+## 16. ¿Qué demuestra esta solución?
 
 Este proyecto demuestra la capacidad de:
 - Analizar y estructurar procesos de negocio.
@@ -261,7 +266,7 @@ Este proyecto demuestra la capacidad de:
 
 ---
 
-## 16. Enfoque de Implementación
+## 17. Enfoque de Implementación
 
 El desarrollo se realizó siguiendo un enfoque estructurado:
 - Definición clara de reglas de negocio.
