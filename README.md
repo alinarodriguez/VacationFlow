@@ -1,84 +1,125 @@
 # VacationFlow
 
-## 🚀 Vacation Request Automation – Power Platform
+## 🚀 Intelligent Vacation Request Automation – Power Platform
 
-### 📌 Project Overview (English)
+---
 
-VacationFlow is an automated vacation request management system built using Microsoft Power Platform.
+## 📌 Executive Summary
 
-The solution allows employees to submit vacation requests, validates the number of requested days against available vacation balance, and routes valid requests through an approval workflow. If approved, the system automatically updates the employee's remaining vacation days.
+VacationFlow is a business process automation solution built with Microsoft Power Platform that digitizes and controls the complete vacation request and approval lifecycle within an organization.
 
-This project demonstrates intermediate Power Automate capabilities including:
+The solution replaces manual email-based or spreadsheet-based processes, ensuring:
 
-- Business rule validation
-- Custom app development
-- Conditional logic
-- Variable handling
-- Approval workflows
-- Dynamic record updates
-- Identity-based request association
+- Automated business rule validation  
+- Prevention of overlapping vacation periods  
+- Real-time vacation balance control  
+- Structured approval workflow  
+- Full audit traceability  
+- Migration-ready architecture  
+
+This project was developed as a professional portfolio case demonstrating real-world automation capabilities for freelance and business environments.
 
 **Project Start Date:** February 16, 2026  
-**Status:** In Development
+**Status:** Active Development  
 
 ---
 
-## 🧩 System Architecture
+## 🧩 Solution Architecture
 
-VacationFlow follows a decoupled architecture that separates user interface, business logic, and data storage.
+VacationFlow follows a decoupled architecture based on separation of concerns:
 
-Flow:
-1. Microsoft Power Apps – Vacation request submission (Canvas App) 
-2. Power Automate Flow – Validation + Approval + Update logic
-3. Microsoft Excel Online (OneDrive) – Data storage
-4. Microsoft Outlook – Email notifications
+| Layer | Technology | Responsibility |
+|-------|------------|----------------|
+| Interface | Power Apps (Canvas App) | User interaction and first-level validation |
+| Business Logic | Power Automate | Critical validation, approval workflow, balance updates |
+| Data Storage | Excel Online (OneDrive) | Structured data persistence |
+| Notifications | Outlook | Automated email communication |
 
-The application automatically associates each request with the logged-in user using identity context, reducing manual input errors.
+The architecture is designed to allow future migration to:
 
-The architecture is designed to be easily migratable to SharePoint Lists or Dataverse if required.
+- SharePoint Lists  
+- Dataverse  
+
+without redesigning core business logic.
 
 ---
 
-## 🔄 Business Logic
+## 🔄 Business Rules & Logic
 
-The flow validates vacation requests based on predefined business rules:
+The system applies dual-layer validation (Application + Automation) to ensure data integrity.
 
-1. Each employee has a defined number of available vacation days.
-2. Requested days are calculated automatically.
-3. If requested days exceed available balance → automatic rejection.
-4. If valid → approval request is sent.
-5. Upon approval → employee balance is updated.
-6. Upon rejection → no balance modification occurs.
+Key rules implemented:
 
-Users cannot manipulate status values directly. Status changes are controlled exclusively by the automated flow.
+- Automatic calculation of requested days  
+- Available balance validation  
+- Overlapping request prevention  
+- Single pending request restriction per employee  
+- Minimum 5-day advance submission requirement  
+- Balance deduction only upon approval  
+- Status transitions controlled exclusively by automated flow  
+- Real approver registration for audit traceability  
+
 ---
 
-## 📋 Business Constraints
+## 🎯 What This Project Demonstrates
 
-- Employees may not have more than one pending vacation request at a time.
-- Vacation requests must not overlap with already approved time off.
-- Requests must be submitted at least 5 days in advance.
-- Requested days must not exceed available vacation balance.
-- Vacation balance is only deducted upon approval.
+This solution showcases the ability to:
+
+- Translate business processes into automated logic  
+- Design hierarchical approval workflows  
+- Implement redundant validations to prevent manual manipulation  
+- Apply role-based access simulation (RBAC)  
+- Build scalable, migration-ready architectures  
+- Deliver structured technical documentation  
+
+---
+
+## 📋 Covered Scenarios
+
+- Valid request within available balance  
+- Automatic rejection for exceeded balance  
+- Blocking of overlapping date ranges  
+- Blocking of multiple pending requests  
+- Approval by manager or administrator  
+- Automatic balance update upon approval  
+- Complete audit trail recording  
 
 ---
 
 ## 🛠 Technologies Used
 
-- Microsoft Power Automate
-- Microsoft Power Apps (Canvas App)
-- Excel Online (OneDrive)
-- Outlook
+- Microsoft Power Apps (Canvas)  
+- Microsoft Power Automate  
+- Excel Online (OneDrive)  
+- Outlook  
+
+---
+
+## 📧 Email Service Consideration
+
+Due to Microsoft licensing limitations in the development environment, Gmail was used as the email notification service instead of Outlook.
+
+This decision does not impact the core architecture, as the notification layer is fully replaceable. In a production environment with appropriate licensing, Outlook or Microsoft Exchange would be the standard integration.
+
+The solution was intentionally designed to keep the notification mechanism modular, allowing seamless replacement without affecting business logic.
 
 ---
 
 ## 📂 Repository Structure
 
-- /docs
-- /docs/images
-- /screenshots
+- `/docs` → Detailed technical documentation  
+- `/docs/images` → Flow diagrams and ER model  
+- `/screenshots` → Application visual evidence  
 
-Documentation and evidence of the flow design and implementation will be stored in these folders.
+---
+
+## 🔮 Potential Extensions
+
+- Multi-level approval workflow  
+- Outlook calendar integration  
+- Power BI dashboard reporting  
+- Migration to SharePoint or Dataverse  
+- Department-based leave policies  
 
 ---
 
@@ -86,73 +127,123 @@ Documentation and evidence of the flow design and implementation will be stored 
 
 # 🇪🇸 Versión en Español
 
-## 🚀 Automatización de Solicitudes de Vacaciones – Power Platform
-
-### 📌 Descripción General
-
-VacationFlow es un sistema automatizado de gestión de solicitudes de vacaciones desarrollado con Microsoft Power Platform.
-
-Permite a los empleados enviar solicitudes de vacaciones, valida automáticamente los días solicitados contra los días disponibles y envía las solicitudes válidas a un flujo de aprobación. Si la solicitud es aprobada, el sistema descuenta automáticamente los días utilizados del saldo del empleado.
-
-Este proyecto demuestra habilidades intermedias en Power Automate incluyendo:
-
-- Desarrollo de aplicaciones con Power Apps
-- Implementación de reglas de negocio
-- Automatización de aprobaciones
-- Control de estados mediante flujo automatizado
-- Actualización dinámica de datos
-- Asociación automática del usuario autenticado
-
-**Fecha de inicio del proyecto:** 16 de febrero de 2026  
-**Estado:** En desarrollo  
+## 🚀 Automatización Inteligente de Solicitudes de Vacaciones – Power Platform
 
 ---
 
-## 🧩 Arquitectura del Sistema
+## 📌 Resumen Ejecutivo
 
-La solución está diseñada con una arquitectura desacoplada que separa:
-- 1Interfaz de usuario (Power Apps)
-- Lógica de negocio (Power Automate)
-- Almacenamiento de datos (Excel Online)
+VacationFlow es una solución de automatización de procesos desarrollada con Microsoft Power Platform que digitaliza y controla el ciclo completo de solicitud y aprobación de vacaciones dentro de una organización.
 
-Flujo general:
+La solución reemplaza procesos manuales basados en correo electrónico o archivos compartidos, asegurando:
 
-→ Power Apps
-→ Power Automate
-→ Excel Online (OneDrive)
-→ Notificaciones por correo (Outlook)
+- Validación automática de reglas de negocio  
+- Prevención de superposición de periodos  
+- Control de saldo en tiempo real  
+- Flujo de aprobación estructurado  
+- Trazabilidad completa  
+- Arquitectura preparada para migración futura  
 
-La arquitectura permite una futura migración a SharePoint Lists o Dataverse sin rediseñar la lógica principal.
+Este proyecto fue desarrollado como caso profesional de portafolio para demostrar capacidades reales en automatización empresarial orientada a entornos freelance y corporativos.
 
----
-
-## 🔄 Lógica de Negocio
-
-El flujo automatizado valida las solicitudes de vacaciones con base en reglas predefinidas:
-
-1. Cada empleado tiene un número definido de días de vacaciones disponibles.
-2. Los días solicitados se calculan automáticamente según las fechas.
-3. Si los días solicitados superan el saldo → rechazo automático.
-4. Si es válida → se envía a aprobación.
-5. Si es aprobada → se actualiza el saldo.
-6. Si es rechazada → no se modifica el saldo.
-7. El estado solo puede ser modificado por el flujo automatizado.
+**Fecha de inicio:** 16 de febrero de 2026  
+**Estado:** Desarrollo activo  
 
 ---
 
-## 📋 Restricciones de Negocio
+## 🧩 Arquitectura de la Solución
 
-- Un empleado no puede tener más de una solicitud de vacaciones con estado "Pendiente" al mismo tiempo.
-- Las solicitudes de vacaciones no deben superponerse con periodos previamente aprobados.
-- Las solicitudes deben enviarse con al menos 5 días de anticipación.
-- Los días solicitados no pueden exceder el saldo de vacaciones disponible.
-- El saldo de vacaciones solo se descuenta una vez que la solicitud es aprobada.
+VacationFlow implementa una arquitectura desacoplada basada en separación de responsabilidades:
+
+| Capa | Tecnología | Responsabilidad |
+|------|------------|----------------|
+| Interfaz | Power Apps (Canvas App) | Interacción del usuario y validación inicial |
+| Lógica de negocio | Power Automate | Validaciones críticas, flujo de aprobación y actualización de saldo |
+| Almacenamiento | Excel Online (OneDrive) | Persistencia estructurada de datos |
+| Notificaciones | Outlook | Comunicación automática por correo |
+
+La arquitectura permite migración futura a:
+
+- SharePoint Lists  
+- Dataverse  
+
+sin necesidad de rediseñar la lógica central.
 
 ---
 
-## 🎯 Objetivos del Proyecto
+## 🔄 Reglas y Lógica de Negocio
 
-- Implementar validación automática de días disponibles.
-- Automatizar el proceso de aprobación.
-- Actualizar dinámicamente el saldo de vacaciones.
-- Documentar arquitectura y flujo para portafolio profesional.
+El sistema aplica validaciones en dos niveles (Aplicación + Automatización) para garantizar integridad de datos.
+
+Reglas principales implementadas:
+
+- Cálculo automático de días solicitados  
+- Validación de saldo disponible  
+- Prevención de solicitudes superpuestas  
+- Restricción de una sola solicitud pendiente por empleado  
+- Envío obligatorio con al menos 5 días de anticipación  
+- Descuento de saldo únicamente tras aprobación  
+- Control total de estados gestionado exclusivamente por el flujo automatizado  
+- Registro del aprobador real para trazabilidad  
+
+---
+
+## 🎯 ¿Qué demuestra este proyecto?
+
+Esta solución evidencia capacidad para:
+
+- Traducir procesos de negocio en lógica automatizada  
+- Diseñar flujos de aprobación jerárquicos  
+- Implementar validaciones redundantes para evitar manipulación manual  
+- Aplicar control de acceso basado en roles (RBAC)  
+- Diseñar arquitecturas escalables y migrables  
+- Documentar soluciones técnicas con enfoque profesional  
+
+---
+
+## 📋 Escenarios Cubiertos
+
+- Solicitud válida dentro del saldo disponible  
+- Rechazo automático por exceso de días  
+- Bloqueo por superposición de fechas  
+- Bloqueo por solicitud pendiente existente  
+- Aprobación por gerente o administrador  
+- Actualización automática de saldo tras aprobación  
+- Registro completo para auditoría  
+
+---
+
+## 🛠 Tecnologías Utilizadas
+
+- Microsoft Power Apps (Canvas)  
+- Microsoft Power Automate  
+- Excel Online (OneDrive)  
+- Outlook  
+
+---
+
+## 📧 Consideración sobre el Servicio de Correo
+
+Debido a limitaciones de licenciamiento de Microsoft en el entorno de desarrollo, se utilizó Gmail como servicio de notificaciones en lugar de Outlook.
+
+Esta decisión no afecta la arquitectura principal, ya que la capa de notificaciones es completamente reemplazable. En un entorno productivo con licencias adecuadas, Outlook o Microsoft Exchange serían la integración estándar.
+
+La solución fue diseñada manteniendo el mecanismo de notificación desacoplado, permitiendo su sustitución sin afectar la lógica de negocio.
+
+---
+
+## 📂 Estructura del Repositorio
+
+- `/docs` → Documentación técnica detallada  
+- `/docs/images` → Diagramas de flujo y modelo ER  
+- `/screenshots` → Evidencia visual de la aplicación  
+
+---
+
+## 🔮 Posibles Extensiones
+
+- Aprobación multinivel  
+- Integración con calendario corporativo  
+- Dashboard en Power BI  
+- Migración a SharePoint o Dataverse  
+- Políticas diferenciadas por departamento  
