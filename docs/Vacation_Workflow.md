@@ -1,6 +1,19 @@
 # Gestión de Vacaciones – Caso de Estudio
 
-## 1. Reglas de Negocio
+## 1. Problema de Negocio
+
+Muchas pequeñas y medianas empresas gestionan las solicitudes de vacaciones de forma manual mediante correos electrónicos o archivos compartidos, lo que genera:
+- Falta de visibilidad del estado de las solicitudes
+- Riesgo de superposición de periodos aprobados
+- Cálculos manuales de saldo de días
+- Ausencia de trazabilidad en aprobaciones
+- Dependencia de seguimiento individual por parte del gerente
+
+Esta solución automatiza el proceso completo de solicitud y aprobación de vacaciones, asegurando control, trazabilidad y cumplimiento de reglas de negocio desde el primer momento.
+
+---
+
+## 2. Reglas de Negocio
 
 - Cada empleado tiene un máximo de 15 días de vacaciones por año.
 - Los empleados no pueden tener más de una solicitud de vacaciones pendiente al mismo tiempo.
@@ -16,7 +29,7 @@
 
 ---
 
-## 2. Estructura de Datos (Excel Online)
+## 3. Estructura de Datos (Excel Online)
 
 La solución utiliza Excel Online (OneDrive) como capa de almacenamiento de datos estructurados.  
 La arquitectura simula un modelo organizacional real, incluyendo jerarquía y control de acceso basado en roles.
@@ -70,7 +83,7 @@ La arquitectura simula un modelo organizacional real, incluyendo jerarquía y co
 
 ---
 
-## 3. Estrategia de Validación
+## 4. Estrategia de Validación
 
 Las validaciones se implementan en **dos niveles** para asegurar la integridad de los datos.
 
@@ -96,7 +109,9 @@ The system blocks saving until all conditions are satisfied.
 - Protects against manual record insertion directly in Excel.
 - Ensures business rule enforcement regardless of entry point.
 
-## 4. Flujo de Aprobación
+---
+
+## 5. Flujo de Aprobación
 
 1. El empleado envía la solicitud.  
 2. `DaysRequested` se calcula automáticamente.  
@@ -115,16 +130,17 @@ The system blocks saving until all conditions are satisfied.
 
 - `Status` = **Rechazada**  
 - `ApprovalComments` obligatorio  
-- No se modifica el saldo  
+- No se modifica el saldo
+
 ---
 
-## 5. Diagrama del Flujo
+## 6. Diagrama del Flujo
 
 ![diagramaFlujo](images/diagramaFlujo.jpg)
 
 ---
 
-## 6. Modelo de Seguridad
+## 7. Modelo de Seguridad
 
 - El acceso basado en roles se simula usando la columna `Role`:
   - **Empleado** → Crear y ver sus propias solicitudes.  
@@ -138,7 +154,7 @@ The system blocks saving until all conditions are satisfied.
 
 ---
 
-## 7. Escenarios de Prueba
+## 8. Escenarios de Prueba
 
 | Escenario                             | Comportamiento Esperado   |
 |---------------------------------------|--------------------------|
@@ -152,7 +168,7 @@ The system blocks saving until all conditions are satisfied.
 
 ---
 
-## 8. Razón de usar Excel Online inicialmente
+## 9. Razón de usar Excel Online inicialmente
 
 Se decidió iniciar con **Excel Online** por varias razones:
 
@@ -165,7 +181,7 @@ Se decidió iniciar con **Excel Online** por varias razones:
 
 ---
 
-## 9. Migración Futura a SharePoint
+## 10. Migración Futura a SharePoint
 
 Actualmente la solución utiliza Excel Online debido a restricciones de licencia, pero la arquitectura permite migración con mínimo refactorizado.
 
@@ -180,7 +196,21 @@ Actualmente la solución utiliza Excel Online debido a restricciones de licencia
 
 ---
 
-## 10. Supuestos y Limitaciones
+## 11. Posibles Personalizaciones para Clientes
+
+La arquitectura permite adaptaciones según las necesidades del cliente, tales como:
+- Aprobaciones multinivel.
+- Políticas diferenciadas por departamento.
+- Integración con calendario de Outlook.
+- Migración a SharePoint o Dataverse.
+- Panel de reportes con Power BI.
+- Interfaz optimizada para dispositivos móviles.
+- Notificaciones personalizadas por tipo de solicitud.
+- Control de vacaciones acumulables por antigüedad.
+
+---
+
+## 12. Supuestos y Limitaciones
 
 - Se implementa una aprobación de un solo nivel para simplificación.  
 - Se puede introducir aprobación multinivel mediante lógica de etapas.  
@@ -190,7 +220,7 @@ Actualmente la solución utiliza Excel Online debido a restricciones de licencia
 
 ---
 
-## 11. Vista General de la Arquitectura
+## 13. Vista General de la Arquitectura
 
 ![FlujoAprobacion](images/FlujoAprobacion.png)
 
@@ -205,7 +235,7 @@ Actualmente la solución utiliza Excel Online debido a restricciones de licencia
 
 ---
 
-## 12. Diagrama de Relaciones de Entidad (ERD)
+## 14. Diagrama de Relaciones de Entidad (ERD)
 ![ERD Vacaciones](images/ERD_vacaciones.png)
 
 **Explicación del Diagrama**
@@ -215,3 +245,28 @@ Actualmente la solución utiliza Excel Online debido a restricciones de licencia
 - ApproverEmail define el gerente asignado.
 - ApprovedBy permite trazabilidad de auditoría (aprobador real vs asignado).
 - La relación autorreferenciada permite modelar la jerarquía organizacional.
+
+---
+
+## 15. ¿Qué demuestra esta solución?
+
+Este proyecto demuestra la capacidad de:
+- Analizar y estructurar procesos de negocio.
+- Diseñar reglas de validación en múltiples capas (aplicación y automatización).
+- Implementar flujos de aprobación basados en jerarquía.
+- Aplicar control de acceso basado en roles (RBAC).
+- Garantizar trazabilidad y auditoría de decisiones.
+- Diseñar una arquitectura preparada para migración futura.
+- Crear soluciones funcionales con bajo costo inicial usando Excel Online.
+
+---
+
+## 16. Enfoque de Implementación
+
+El desarrollo se realizó siguiendo un enfoque estructurado:
+- Definición clara de reglas de negocio.
+- Diseño del modelo de datos.
+- Implementación de validaciones en Power Apps.
+- Implementación de controles y flujo de aprobación en Power Automate.
+- Pruebas de escenarios críticos.
+- Documentación técnica completa para facilitar mantenimiento y migración futura.
