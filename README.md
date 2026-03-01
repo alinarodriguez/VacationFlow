@@ -20,7 +20,7 @@ It replaces manual email-based or spreadsheet-based processes, providing:
 This project was developed as a professional portfolio case to demonstrate real-world automation capabilities for business and freelance environments.
 
 **Project Start Date:** February 16, 2026  
-**Status:** Active Development  
+**Status:** Done Development  
 
 ---
 
@@ -154,7 +154,7 @@ Reemplaza procesos manuales basados en correo electrónico o archivos compartido
 Este proyecto fue desarrollado como caso profesional de portafolio para demostrar capacidades reales en automatización empresarial.
 
 **Fecha de inicio:** 16 de febrero de 2026  
-**Estado:** Desarrollo activo  
+**Estado:** Desarrollo Terminado  
 
 ---
 
