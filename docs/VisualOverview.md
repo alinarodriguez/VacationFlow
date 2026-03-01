@@ -1,91 +1,143 @@
 # VacationFlow – Presentación General
 
-## 🚀 Automatización de Solicitudes de Vacaciones
+## 🚀 Automatización Integral de Solicitudes de Vacaciones
 
-VacationFlow es una solución desarrollada con Microsoft Power Platform que automatiza completamente el proceso de solicitud y aprobación de vacaciones dentro de una organización.
+VacationFlow es una solución desarrollada con Microsoft Power Platform que automatiza el ciclo completo de gestión de vacaciones dentro de una organización.
 
-El objetivo es reemplazar procesos manuales basados en correos electrónicos o archivos compartidos, proporcionando control, trazabilidad y validaciones automáticas.
+La aplicación reemplaza procesos manuales basados en correos electrónicos o archivos compartidos, incorporando validaciones de negocio, flujo de aprobación automatizado y actualización consistente de datos.
 
----
-
-## 📌 1. Formulario de Solicitud
-
-![Formulario](../screenshots/01_request-form.png)
-
-Los empleados ingresan sus fechas de vacaciones desde una aplicación sencilla e intuitiva.
-
-El sistema calcula automáticamente los días solicitados y valida la información antes de permitir el envío.
+El resultado es un proceso estructurado, trazable y controlado de principio a fin.
 
 ---
 
-## ✅ 2. Validaciones Automáticas
+## 📌 1. Registro de Solicitud
 
-![Validaciones](../screenshots/02_validation-message.png)
+![Formulario](../Screenshots/01_request-form.png)
 
-La aplicación impide:
+Los empleados registran sus fechas desde una interfaz clara e intuitiva.
 
-- Solicitudes que excedan el saldo disponible.
-- Superposición con vacaciones previamente aprobadas.
-- Más de una solicitud pendiente por empleado.
-- Solicitudes con menos de 5 días de anticipación.
+La aplicación:
 
-Esto reduce errores y evita intervención manual.
+- Calcula automáticamente los días solicitados.
+- Muestra el saldo disponible en tiempo real.
+- Aplica validaciones antes de permitir el envío.
+- Previene errores desde el origen del proceso.
+
+El enfoque está en usabilidad y prevención temprana de inconsistencias.
+
+---
+
+## ⚠️ 2. Validaciones de Reglas de Negocio
+
+![Validaciones](../Screenshots/02_validation-message.png)
+
+La solución incorpora validaciones automáticas que garantizan coherencia operativa:
+
+- Bloqueo de solicitudes que excedan el saldo disponible.
+- Prevención de superposición con vacaciones aprobadas.
+- Restricción de múltiples solicitudes pendientes por empleado.
+- Control de anticipación mínima requerida para solicitar vacaciones.
+
+Estas validaciones reducen intervención manual y evitan reprocesos administrativos.
 
 ---
 
 ## 🔄 3. Flujo Automatizado de Aprobación
 
-![Flujo](../screenshots/03_flow-overview.png)
+![Flujo](../Screenshots/03_flow-overview.png)
 
-Una vez enviada la solicitud:
+Una vez enviada la solicitud, se activa un flujo en Power Automate que:
 
-- Se asigna automáticamente al gerente correspondiente.
-- El estado se establece como **Pendiente**.
-- Se envía notificación por correo electrónico.
-- Todas las acciones quedan registradas para auditoría.
+- Asigna automáticamente la solicitud al responsable correspondiente.
+- Establece el estatus inicial como **Pendiente**.
+- Ejecuta lógica condicional según el resultado (Aprobado / Rechazado).
+- Envía notificaciones automatizadas.
+- Registra cada acción para fines de auditoría.
+
+La arquitectura del flujo sigue una estructura clara:
+
+**Trigger → Validación → Condición → Acción → Actualización**
 
 ---
 
-## 👥 4. Proceso de Aprobación
+## 📧 4. Notificación Automática por Correo
 
-![Correo de Aprobación](../screenshots/04_approval-email.png)
+![Correo de Notificación](../Screenshots/04_approval-email.png)
 
-El gerente o administrador puede:
+El sistema envía notificaciones estructuradas que incluyen:
+
+- Datos del empleado.
+- Fechas solicitadas.
+- Días totales.
+- Comentarios.
+- Enlace directo a revisión.
+
+Esto garantiza comunicación inmediata y seguimiento oportuno.
+
+---
+
+## 📊 5. Panel de Administración
+
+![Panel de Administración](../Screenshots/06_panelAdmin.png)
+
+El panel permite a administradores:
+
+- Visualizar indicadores clave (totales, pendientes, aprobadas, rechazadas).
+- Filtrar por empleado, estatus o rango de fechas.
+- Revisar solicitudes individuales.
+- Acceder al módulo de decisión.
+
+Ofrece visibilidad centralizada del proceso completo.
+
+---
+
+## 👥 6. Pantalla de Aprobación / Rechazo
+
+![Modal de Aprobación](../Screenshots/05_approval-modal.png)
+
+Desde esta vista el gerente puede:
 
 - Aprobar la solicitud.
 - Rechazarla con comentario obligatorio.
+- Registrar la decisión con fecha y usuario responsable.
 
-El sistema registra quién realizó la acción y en qué momento.
-
----
-
-## 📊 5. Actualización Automática de Saldo
-
-![Actualización de Saldo](../screenshots/05_balance-update.png)
-
-Al aprobarse una solicitud:
-
-- El saldo disponible del empleado se actualiza automáticamente.
-- Se mantiene un historial completo de movimientos.
-- Se garantiza consistencia de datos.
+Esto asegura control, responsabilidad y trazabilidad.
 
 ---
 
-## 💼 ¿Para qué tipo de empresa es ideal?
+## 📊 7. Actualización Automática de Saldo
 
-Esta solución es ideal para:
+![Saldo Antes](../Screenshots/07_SaldoAntes.png)
 
-- Pequeñas y medianas empresas sin sistema de Recursos Humanos.
-- Negocios que gestionan vacaciones por correo o Excel.
-- Organizaciones que utilizan Microsoft 365 y desean automatizar procesos internos.
-- Empresas que buscan orden y trazabilidad sin invertir en un sistema HR completo.
+![Saldo Después](../Screenshots/08_SaldoDespues.png)
+
+Cuando una solicitud es aprobada:
+
+- El saldo disponible se actualiza automáticamente.
+- Se mantiene consistencia entre aplicación y fuente de datos.
+- Se preserva integridad en los cálculos acumulados.
+
+Demuestra persistencia y sincronización de datos.
 
 ---
 
-## 🎯 Valor que aporta
+## 🏢 Escenarios de Aplicación
 
-- Reducción de errores manuales  
-- Ahorro de tiempo en aprobaciones  
-- Mayor visibilidad del estado de solicitudes  
+VacationFlow es especialmente útil para:
+
+- Pequeñas y medianas empresas sin sistema formal de Recursos Humanos.
+- Organizaciones que gestionan vacaciones mediante correo o Excel manual.
+- Empresas que utilizan Microsoft 365 y desean automatizar procesos internos.
+- Negocios que buscan trazabilidad sin invertir en un sistema HR completo.
+
+---
+
+## 🎯 Valor Estratégico
+
+- Reducción significativa de errores manuales  
+- Disminución de tiempos en aprobaciones  
+- Visibilidad en tiempo real del estado de solicitudes  
 - Registro auditable de decisiones  
-- Arquitectura preparada para migración futura a SharePoint o Dataverse  
+- Arquitectura escalable preparada para migración futura a SharePoint o Dataverse  
+
+VacationFlow no es solo una aplicación, sino un modelo de automatización aplicable a múltiples procesos internos.
