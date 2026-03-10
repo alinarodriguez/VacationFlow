@@ -24,23 +24,27 @@ This project was developed as a professional portfolio case to demonstrate real-
 
 ---
 
-## 🧩 Solution Architecture
+## 🧩 Architecture Overview
 
-VacationFlow follows a decoupled architecture based on separation of responsibilities:
+![VacationFlow Architecture](docs/images/architecture.png)
 
-| Layer | Technology | Responsibility |
-|-------|------------|----------------|
-| Interface | Power Apps (Canvas App) | User interaction and first-level validation |
-| Business Logic | Power Automate | Validation, approval workflow, balance updates |
-| Data Storage | Excel Online (OneDrive) | Structured data persistence |
-| Notifications | Gmail (Dev) / Outlook (Production-ready) | Automated email communication |
+VacationFlow is built using the Microsoft Power Platform ecosystem to automate the full lifecycle of vacation requests.
 
-The architecture is designed to allow future migration to:
+The architecture follows a layered design that separates user interaction, workflow automation, and data persistence.
 
-- SharePoint Lists  
-- Dataverse  
+**Components**
 
-without redesigning core business logic.
+- **Power Apps** provides the user interface where employees submit vacation requests and managers review approvals.
+- **Power Automate** executes the approval workflow, applies business rules, and controls all status transitions.
+- **Microsoft Dataverse** stores structured data including employees, vacation balances, and request history.
+- **Email Notifications** are automatically triggered to inform employees and managers of approval decisions.
+
+This architecture ensures:
+
+- Clear separation of responsibilities
+- Automated process control
+- Data consistency
+- Scalability for enterprise environments
 
 ---
 
@@ -90,8 +94,9 @@ This solution showcases the ability to:
 
 - Microsoft Power Apps (Canvas)  
 - Microsoft Power Automate  
-- Excel Online (OneDrive)  
-- Gmail (Development Environment)  
+- Microsoft Dataverse  
+- Excel Online (initial prototype data layer)  
+- Gmail (development notification service)   
 
 ---
 
@@ -103,9 +108,9 @@ The notification layer is modular and can be seamlessly replaced with Outlook or
 
 ---
 
-## 📸 Visual Demonstration
+## 📸 Application Screenshots
 
-Application screenshots are available in:
+Example screens of the application interface can be found in:
 
 `/screenshots`
 
@@ -129,6 +134,14 @@ This solution is ideal for:
 - Teams needing traceability without investing in a full HR platform  
 
 ---
+## Author
+
+**Alina Rodríguez**
+
+Business Process Consultant | Digital Automation Specialist
+
+LinkedIn  
+https://www.linkedin.com/in/alinarodriguezglez/ 
 
 ---
 
@@ -160,21 +173,25 @@ Este proyecto fue desarrollado como caso profesional de portafolio para demostra
 
 ## 🧩 Arquitectura de la Solución
 
-VacationFlow implementa una arquitectura desacoplada basada en separación de responsabilidades:
+![Arquitectura VacationFlow](docs/images/architecture.png)
 
-| Capa | Tecnología | Responsabilidad |
-|------|------------|----------------|
-| Interfaz | Power Apps (Canvas App) | Interacción del usuario y validación inicial |
-| Lógica de negocio | Power Automate | Validaciones, flujo de aprobación y actualización de saldo |
-| Almacenamiento | Excel Online (OneDrive) | Persistencia estructurada de datos |
-| Notificaciones | Gmail (Desarrollo) / Outlook (Producción) | Comunicación automática |
+VacationFlow está construido utilizando el ecosistema de Microsoft Power Platform para automatizar el ciclo completo de solicitudes de vacaciones.
 
-La arquitectura permite migración futura a:
+La arquitectura sigue un diseño en capas que separa la interacción del usuario, la automatización del flujo de trabajo y la persistencia de datos.
 
-- SharePoint Lists  
-- Dataverse  
+**Componentes**
 
-sin necesidad de rediseñar la lógica principal.
+- **Power Apps** proporciona la interfaz donde los empleados registran solicitudes de vacaciones y los gerentes revisan las aprobaciones.
+- **Power Automate** ejecuta el flujo de aprobación, aplica las reglas de negocio y controla las transiciones de estado.
+- **Microsoft Dataverse** almacena los datos estructurados como empleados, saldos de vacaciones e historial de solicitudes.
+- **Notificaciones por correo** se envían automáticamente para informar a empleados y gerentes sobre las decisiones de aprobación.
+
+Esta arquitectura permite:
+
+- Separación clara de responsabilidades  
+- Control automatizado del proceso  
+- Consistencia de datos  
+- Escalabilidad para entornos empresariales
 
 ---
 
@@ -199,14 +216,15 @@ Reglas implementadas:
 
 - Microsoft Power Apps (Canvas)  
 - Microsoft Power Automate  
-- Excel Online (OneDrive)  
+- Microsoft Dataverse  
+- Excel Online (capa inicial de datos del prototipo)   
 - Gmail (Entorno de desarrollo)  
 
 ---
 
-## 📸 Demostración Visual
+## 📸 Capturas de la Aplicación
 
-Capturas disponibles en:
+Ejemplos de la interfaz disponibles en:
 
 `/screenshots`
 
@@ -227,4 +245,15 @@ Esta solución es ideal para:
 - Pequeñas y medianas empresas sin sistema de Recursos Humanos  
 - Organizaciones que gestionan vacaciones por correo o Excel  
 - Empresas que utilizan Microsoft 365 y desean automatizar procesos internos  
-- Equipos que necesitan control y trazabilidad sin invertir en un sistema HR completo  
+- Equipos que necesitan control y trazabilidad sin invertir en un sistema HR completo
+
+---
+
+## Autor
+
+**Alina Rodríguez**
+
+Business Process Consultant | Digital Automation Specialist
+
+LinkedIn  
+https://www.linkedin.com/in/alinarodriguezglez/
